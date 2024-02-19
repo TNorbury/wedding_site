@@ -48,3 +48,7 @@ ColorScheme colorSchemeOf(BuildContext context) =>
 
 /// Convenience function to get the context theme's text theme
 TextTheme textThemeOf(BuildContext context) => Theme.of(context).textTheme;
+
+extension TextStyleX on TextStyle? {
+  TextStyle? withColor(Color color) => this?.merge(TextStyle(color: color));
+}

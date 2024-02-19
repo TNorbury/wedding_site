@@ -21,7 +21,8 @@ class RouteWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+      backgroundColor:
+          Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.55),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 8),
         child: Material(
@@ -30,7 +31,7 @@ class RouteWrapper extends StatelessWidget {
           child: Material(
             elevation: 2,
             shadowColor: Colors.black26,
-            color: colorSchemeOf(context).surface,
+            color: colorSchemeOf(context).primaryContainer,
             child: Column(
               children: [
                 MouseRegion(
@@ -43,15 +44,22 @@ class RouteWrapper extends StatelessWidget {
                         children: [
                           Text(
                             "Missy x Tyler",
-                            style: textThemeOf(context).headlineMedium,
+                            style: textThemeOf(context)
+                                .headlineMedium
+                                .withColor(
+                                    colorSchemeOf(context).onPrimaryContainer),
                           ),
-                          const Text("05/31/2024 - Portland, OR"),
+                          Text("05/31/2024 - Portland, OR",
+                              style: textThemeOf(context).bodyMedium.withColor(
+                                  colorSchemeOf(context).onPrimaryContainer)),
                         ],
                       ),
                     ),
                   ),
                 ),
-                const NavHeader(),
+                NavHeader(
+                  selectedTab: selectedTab,
+                ),
                 Expanded(
                   child: Container(
                     color: colorSchemeOf(context).surface,
@@ -71,7 +79,12 @@ class RouteWrapper extends StatelessWidget {
 }
 
 class NavHeader extends StatelessWidget {
-  const NavHeader({Key? key}) : super(key: key);
+  final SiteTab? selectedTab;
+
+  const NavHeader({
+    Key? key,
+    this.selectedTab,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +100,7 @@ class NavHeader extends StatelessWidget {
                   child: NavTab(
                     label: "RSVP",
                     go: RsvpRouteData().go,
+                    isSelected: selectedTab == SiteTab.rsvp,
                   ),
                 ),
                 const VerticalDivider(width: 1),
@@ -94,6 +108,7 @@ class NavHeader extends StatelessWidget {
                   child: NavTab(
                     label: "Gift Registry",
                     go: GiftRouteData().go,
+                    isSelected: selectedTab == SiteTab.gift,
                   ),
                 ),
                 const VerticalDivider(width: 1),
@@ -101,6 +116,7 @@ class NavHeader extends StatelessWidget {
                   child: NavTab(
                     label: "Venue Info",
                     go: VenueRouteData().go,
+                    isSelected: selectedTab == SiteTab.venue,
                   ),
                 ),
               ],
@@ -116,27 +132,48 @@ class NavHeader extends StatelessWidget {
 class NavTab extends StatelessWidget {
   final String label;
   final void Function(BuildContext context)? go;
+  final bool isSelected;
   const NavTab({
     Key? key,
     required this.label,
     this.go,
+    required this.isSelected,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final TextStyle textStyle;
+
+    if (isSelected) {
+      textStyle = textThemeOf(context)
+          .titleMedium
+          .withColor(colorSchemeOf(context).onPrimary)!;
+    } else {
+      textStyle = textThemeOf(context)
+          .titleMedium
+          .withColor(colorSchemeOf(context).onSurface)!;
+    }
+    const animationDuration = Duration(milliseconds: 250);
     return Tooltip(
       message: label,
       child: InkWell(
         onTap: () {
           go?.call(context);
         },
-        child: Align(
-          alignment: Alignment.center,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Text(
-              label,
-              style: textThemeOf(context).titleMedium,
+        child: AnimatedContainer(
+          duration: animationDuration,
+          color: isSelected
+              ? colorSchemeOf(context).primary
+              : colorSchemeOf(context).surface,
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Align(
+            alignment: Alignment.center,
+            child: AnimatedDefaultTextStyle(
+              duration: animationDuration,
+              style: textStyle,
+              child: Text(
+                label,
+              ),
             ),
           ),
         ),

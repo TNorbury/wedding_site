@@ -14,7 +14,17 @@ final router = GoRouter(
   routes: [
     ShellRoute(
       builder: (BuildContext context, GoRouterState state, Widget child) {
-        return RouteWrapper(child: child);
+        final selectedTab = switch (state.matchedLocation) {
+          "/rsvp" => SiteTab.rsvp,
+          "/gift" => SiteTab.gift,
+          "/venue" => SiteTab.venue,
+          _ => null,
+        };
+
+        return RouteWrapper(
+          selectedTab: selectedTab,
+          child: child,
+        );
       },
       routes: $appRoutes,
     ),
