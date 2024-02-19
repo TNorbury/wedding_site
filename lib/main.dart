@@ -1,10 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+import 'package:wedding_site/firebase_options.dart';
 import 'package:wedding_site/routes/router.dart';
 import 'package:wedding_site/theme/theme.dart';
 
-void main() {
+Future<void> main() async {
   usePathUrlStrategy();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(const MyApp());
 }
