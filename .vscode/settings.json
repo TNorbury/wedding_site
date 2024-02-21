@@ -1,6 +1,9 @@
 {
   "dart.flutterSdkPath": ".fvm/versions/3.16.1",
   "cSpell.words": [
+    "playfair",
+    "raleway",
+    "riverpod",
     "rsvp",
     "Rsvp"
   ]
