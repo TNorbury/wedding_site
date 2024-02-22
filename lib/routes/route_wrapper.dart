@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-
 import 'package:wedding_site/routes/router.dart';
 import 'package:wedding_site/theme/theme.dart';
 
 enum SiteTab {
-  rsvp,
-  gift,
-  venue,
+  home("Home"),
+  rsvp("RSVP"),
+  gift("Gift Registry"),
+  venue("Venue Info");
+
+  final String label;
+  const SiteTab(this.label);
 }
 
 class RouteWrapper extends StatelessWidget {
@@ -20,11 +23,40 @@ class RouteWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final phone = MediaQuery.of(context).size.width <= 660;
+
     return Scaffold(
       backgroundColor:
           Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.55),
+      drawer: NavigationDrawer(
+        selectedIndex: selectedTab?.index,
+        backgroundColor: colorSchemeOf(context).surfaceVariant,
+        elevation: 0,
+        children: [
+          NavDrawerItem(
+            label: "Home",
+            go: HomePageRouteData().go,
+            isSelected: selectedTab == SiteTab.home,
+          ),
+          NavDrawerItem(
+            label: SiteTab.rsvp.label,
+            go: RsvpRouteData().go,
+            isSelected: selectedTab == SiteTab.rsvp,
+          ),
+          NavDrawerItem(
+            label: SiteTab.gift.label,
+            go: GiftRouteData().go,
+            isSelected: selectedTab == SiteTab.gift,
+          ),
+          NavDrawerItem(
+            label: SiteTab.venue.label,
+            go: VenueRouteData().go,
+            isSelected: selectedTab == SiteTab.venue,
+          ),
+        ],
+      ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: phone ? 24 : 64, vertical: 8),
         child: Material(
           borderRadius: BorderRadius.circular(16),
           clipBehavior: Clip.antiAlias,
@@ -33,30 +65,11 @@ class RouteWrapper extends StatelessWidget {
           color: colorSchemeOf(context).primaryContainer,
           child: Column(
             children: [
-              MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: GestureDetector(
-                  onTap: () => HomePageRouteData().go(context),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Column(
-                      children: [
-                        Text(
-                          "Missy x Tyler",
-                          style: textThemeOf(context).headlineMedium.withColor(
-                              colorSchemeOf(context).onPrimaryContainer),
-                        ),
-                        Text("05/31/2024 - Portland, OR",
-                            style: textThemeOf(context).bodyMedium.withColor(
-                                colorSchemeOf(context).onPrimaryContainer)),
-                      ],
-                    ),
-                  ),
+              const SiteHeader(),
+              if (!phone)
+                NavHeader(
+                  selectedTab: selectedTab,
                 ),
-              ),
-              NavHeader(
-                selectedTab: selectedTab,
-              ),
               Expanded(
                 child: Container(
                   color: colorSchemeOf(context).surface,
@@ -75,6 +88,94 @@ class RouteWrapper extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class SiteHeader extends StatelessWidget {
+  const SiteHeader({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // final phone = MediaQuery.of(context).size.width <= WidthBreakpoints.medium;
+    final smallScreen = MediaQuery.of(context).size.width <= 660;
+
+    final direction = smallScreen ? Axis.vertical : Axis.horizontal;
+    Widget child;
+
+    final content = Flex(
+      direction: direction,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: smallScreen ? MainAxisSize.min : MainAxisSize.max,
+      children: [
+        if (!smallScreen)
+          Flexible(
+            child: Image.asset(
+              "assets/tandem-love.png",
+              height: 150,
+            ),
+          ),
+        if (smallScreen)
+          Flexible(
+            flex: 3,
+            child: Image.asset(
+              "assets/tandem-love.png",
+              height: 75,
+            ),
+          ),
+        Flexible(
+          flex: 3,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Missy x Tyler",
+                style: textThemeOf(context)
+                    .headlineMedium
+                    .withColor(colorSchemeOf(context).onPrimaryContainer),
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                "05/31/2024 - Portland, OR",
+                style: textThemeOf(context)
+                    .bodyMedium
+                    .withColor(colorSchemeOf(context).onPrimaryContainer),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+        if (!smallScreen) const Spacer(),
+      ],
+    );
+    if (smallScreen) {
+      child = Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          IconButton(
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+            icon: Icon(Icons.menu),
+          ),
+          SizedBox(width: 24),
+          Flexible(child: content)
+        ],
+      );
+    } else {
+      child = content;
+    }
+
+    return Padding(
+      padding: EdgeInsets.only(
+        right: 32,
+        left: smallScreen ? 0 : 32,
+        top: 16.0,
+        bottom: 16.0,
+      ),
+      child: child,
     );
   }
 }
@@ -99,7 +200,15 @@ class NavHeader extends StatelessWidget {
               children: [
                 Expanded(
                   child: NavTab(
-                    label: "RSVP",
+                    label: SiteTab.home.label,
+                    go: HomePageRouteData().go,
+                    isSelected: selectedTab == SiteTab.home,
+                  ),
+                ),
+                const VerticalDivider(width: 1),
+                Expanded(
+                  child: NavTab(
+                    label: SiteTab.rsvp.label,
                     go: RsvpRouteData().go,
                     isSelected: selectedTab == SiteTab.rsvp,
                   ),
@@ -107,7 +216,7 @@ class NavHeader extends StatelessWidget {
                 const VerticalDivider(width: 1),
                 Expanded(
                   child: NavTab(
-                    label: "Gift Registry",
+                    label: SiteTab.gift.label,
                     go: GiftRouteData().go,
                     isSelected: selectedTab == SiteTab.gift,
                   ),
@@ -115,7 +224,7 @@ class NavHeader extends StatelessWidget {
                 const VerticalDivider(width: 1),
                 Expanded(
                   child: NavTab(
-                    label: "Venue Info",
+                    label: SiteTab.venue.label,
                     go: VenueRouteData().go,
                     isSelected: selectedTab == SiteTab.venue,
                   ),
@@ -174,11 +283,53 @@ class NavTab extends StatelessWidget {
               style: textStyle,
               child: Text(
                 label,
+                textAlign: TextAlign.center,
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class NavDrawerItem extends StatelessWidget {
+  final String label;
+  final void Function(BuildContext context)? go;
+  final bool isSelected;
+  const NavDrawerItem({
+    Key? key,
+    required this.label,
+    this.go,
+    required this.isSelected,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final TextStyle textStyle;
+
+    if (isSelected) {
+      textStyle = textThemeOf(context)
+          .titleMedium
+          .withColor(colorSchemeOf(context).onPrimary)!;
+    } else {
+      textStyle = textThemeOf(context)
+          .titleMedium
+          .withColor(colorSchemeOf(context).onSurfaceVariant)!;
+    }
+
+    return ListTile(
+      title: Text(
+        label,
+        style: textStyle,
+      ),
+      tileColor: isSelected
+          ? colorSchemeOf(context).primary
+          : colorSchemeOf(context).surfaceVariant,
+      onTap: () {
+        go?.call(context);
+        Navigator.of(context).pop();
+      },
     );
   }
 }

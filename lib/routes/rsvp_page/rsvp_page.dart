@@ -121,10 +121,7 @@ class _RsvpPageState extends ConsumerState<RsvpPage> {
               Text(
                 "We hope to see you ${guest.name}. Please let us know if you're coming and enter any dietary restrictions that you have.",
               ),
-              SizedBox(
-                width: width,
-                child: const GuestForm(),
-              ),
+              const GuestForm(),
             ],
           ),
         );

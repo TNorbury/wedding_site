@@ -15,6 +15,7 @@ final router = GoRouter(
     ShellRoute(
       builder: (BuildContext context, GoRouterState state, Widget child) {
         final selectedTab = switch (state.matchedLocation) {
+          "/" => SiteTab.home,
           "/rsvp" => SiteTab.rsvp,
           "/gift" => SiteTab.gift,
           "/venue" => SiteTab.venue,
