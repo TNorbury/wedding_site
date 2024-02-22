@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:wedding_site/firebase_options.dart';
 import 'package:wedding_site/routes/router.dart';
@@ -9,7 +10,7 @@ Future<void> main() async {
   usePathUrlStrategy();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final lightTheme = themeForBrightness(Brightness.light);
     return MaterialApp.router(
-      title: 'Tyler + Missy 4 Every',
+      title: 'Tyler + Missy 4 Ever',
       theme: lightTheme,
       routerConfig: router,
     );
