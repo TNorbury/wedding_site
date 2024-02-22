@@ -21,9 +21,9 @@ WeddingGuest _$WeddingGuestFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$WeddingGuest {
 // firestore ID
-  String get id =>
+  String? get id =>
       throw _privateConstructorUsedError; // randomly generated access code, allows guests to access the site
-  String get accessCode => throw _privateConstructorUsedError;
+  String? get accessCode => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   bool? get isComing => throw _privateConstructorUsedError;
   String get dietaryInfo => throw _privateConstructorUsedError;
@@ -43,8 +43,8 @@ abstract class $WeddingGuestCopyWith<$Res> {
       _$WeddingGuestCopyWithImpl<$Res, WeddingGuest>;
   @useResult
   $Res call(
-      {String id,
-      String accessCode,
+      {String? id,
+      String? accessCode,
       String name,
       bool? isComing,
       String dietaryInfo,
@@ -67,8 +67,8 @@ class _$WeddingGuestCopyWithImpl<$Res, $Val extends WeddingGuest>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? accessCode = null,
+    Object? id = freezed,
+    Object? accessCode = freezed,
     Object? name = null,
     Object? isComing = freezed,
     Object? dietaryInfo = null,
@@ -76,14 +76,14 @@ class _$WeddingGuestCopyWithImpl<$Res, $Val extends WeddingGuest>
     Object? plusOne = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      accessCode: null == accessCode
+              as String?,
+      accessCode: freezed == accessCode
           ? _value.accessCode
           : accessCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -129,8 +129,8 @@ abstract class _$$WeddingGuestImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
-      String accessCode,
+      {String? id,
+      String? accessCode,
       String name,
       bool? isComing,
       String dietaryInfo,
@@ -152,8 +152,8 @@ class __$$WeddingGuestImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? accessCode = null,
+    Object? id = freezed,
+    Object? accessCode = freezed,
     Object? name = null,
     Object? isComing = freezed,
     Object? dietaryInfo = null,
@@ -161,14 +161,14 @@ class __$$WeddingGuestImplCopyWithImpl<$Res>
     Object? plusOne = freezed,
   }) {
     return _then(_$WeddingGuestImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      accessCode: null == accessCode
+              as String?,
+      accessCode: freezed == accessCode
           ? _value.accessCode
           : accessCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -197,8 +197,8 @@ class __$$WeddingGuestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WeddingGuestImpl implements _WeddingGuest {
   const _$WeddingGuestImpl(
-      {required this.id,
-      required this.accessCode,
+      {this.id,
+      this.accessCode,
       required this.name,
       this.isComing,
       this.dietaryInfo = "",
@@ -210,10 +210,10 @@ class _$WeddingGuestImpl implements _WeddingGuest {
 
 // firestore ID
   @override
-  final String id;
+  final String? id;
 // randomly generated access code, allows guests to access the site
   @override
-  final String accessCode;
+  final String? accessCode;
   @override
   final String name;
   @override
@@ -271,8 +271,8 @@ class _$WeddingGuestImpl implements _WeddingGuest {
 
 abstract class _WeddingGuest implements WeddingGuest {
   const factory _WeddingGuest(
-      {required final String id,
-      required final String accessCode,
+      {final String? id,
+      final String? accessCode,
       required final String name,
       final bool? isComing,
       final String dietaryInfo,
@@ -283,9 +283,9 @@ abstract class _WeddingGuest implements WeddingGuest {
       _$WeddingGuestImpl.fromJson;
 
   @override // firestore ID
-  String get id;
+  String? get id;
   @override // randomly generated access code, allows guests to access the site
-  String get accessCode;
+  String? get accessCode;
   @override
   String get name;
   @override

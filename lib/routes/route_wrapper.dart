@@ -28,49 +28,50 @@ class RouteWrapper extends StatelessWidget {
         child: Material(
           borderRadius: BorderRadius.circular(16),
           clipBehavior: Clip.antiAlias,
-          child: Material(
-            elevation: 2,
-            shadowColor: Colors.black26,
-            color: colorSchemeOf(context).primaryContainer,
-            child: Column(
-              children: [
-                MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: GestureDetector(
-                    onTap: () => HomePageRouteData().go(context),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            "Missy x Tyler",
-                            style: textThemeOf(context)
-                                .headlineMedium
-                                .withColor(
-                                    colorSchemeOf(context).onPrimaryContainer),
-                          ),
-                          Text("05/31/2024 - Portland, OR",
-                              style: textThemeOf(context).bodyMedium.withColor(
-                                  colorSchemeOf(context).onPrimaryContainer)),
-                        ],
-                      ),
+          elevation: 2,
+          shadowColor: Colors.black26,
+          color: colorSchemeOf(context).primaryContainer,
+          child: Column(
+            children: [
+              MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () => HomePageRouteData().go(context),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Missy x Tyler",
+                          style: textThemeOf(context).headlineMedium.withColor(
+                              colorSchemeOf(context).onPrimaryContainer),
+                        ),
+                        Text("05/31/2024 - Portland, OR",
+                            style: textThemeOf(context).bodyMedium.withColor(
+                                colorSchemeOf(context).onPrimaryContainer)),
+                      ],
                     ),
                   ),
                 ),
-                NavHeader(
-                  selectedTab: selectedTab,
-                ),
-                Expanded(
-                  child: Container(
-                    color: colorSchemeOf(context).surface,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 16.0),
-                      child: SelectionArea(child: child),
+              ),
+              NavHeader(
+                selectedTab: selectedTab,
+              ),
+              Expanded(
+                child: Container(
+                  color: colorSchemeOf(context).surface,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 16.0,
+                      horizontal: 32,
+                    ),
+                    child: SelectionArea(
+                      child: ClipRect(child: child),
                     ),
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
         ),
       ),

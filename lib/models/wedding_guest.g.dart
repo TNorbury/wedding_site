@@ -8,8 +8,8 @@ part of 'wedding_guest.dart';
 
 _$WeddingGuestImpl _$$WeddingGuestImplFromJson(Map<String, dynamic> json) =>
     _$WeddingGuestImpl(
-      id: json['id'] as String,
-      accessCode: json['accessCode'] as String,
+      id: json['id'] as String?,
+      accessCode: json['accessCode'] as String?,
       name: json['name'] as String,
       isComing: json['isComing'] as bool?,
       dietaryInfo: json['dietaryInfo'] as String? ?? "",
@@ -27,5 +27,5 @@ Map<String, dynamic> _$$WeddingGuestImplToJson(_$WeddingGuestImpl instance) =>
       'isComing': instance.isComing,
       'dietaryInfo': instance.dietaryInfo,
       'plusOneAllowed': instance.plusOneAllowed,
-      'plusOne': instance.plusOne,
+      'plusOne': instance.plusOne?.toJson(),
     };

@@ -7,10 +7,10 @@ part 'wedding_guest.g.dart';
 class WeddingGuest with _$WeddingGuest {
   const factory WeddingGuest({
     // firestore ID
-    required String id,
+    String? id,
 
     // randomly generated access code, allows guests to access the site
-    required String accessCode,
+    String? accessCode,
     required String name,
     bool? isComing,
     @Default("") String dietaryInfo,
