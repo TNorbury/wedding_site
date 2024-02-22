@@ -44,4 +44,5 @@ app.*.map.json
 
 .fvm/flutter_sdk
 .fvm/versions
+
 lib/firebase_options.dart
