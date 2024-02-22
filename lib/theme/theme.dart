@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:wedding_site/theme/color_scheme.dart';
 
 ThemeData themeForBrightness(Brightness brightness) {
@@ -12,55 +11,62 @@ ThemeData themeForBrightness(Brightness brightness) {
     useMaterial3: true,
     colorScheme: colorScheme,
     textTheme: TextTheme(
-      headlineMedium: GoogleFonts.ultra(
+      headlineMedium: TextStyle(
+        fontFamily: "Ultra",
         fontWeight: FontWeight.w400,
         color: colorScheme.onSurface,
         fontSize: 28,
         letterSpacing: 1.25,
       ),
-      titleMedium: GoogleFonts.playfair(
+      titleMedium: TextStyle(
+        fontFamily: "Playfair",
         fontWeight: FontWeight.w500,
-        letterSpacing: 1.15,
         fontSize: 18,
         color: colorScheme.onSurface,
       ),
-      titleLarge: GoogleFonts.playfair(
+      titleLarge: TextStyle(
+        fontFamily: "Playfair",
         fontWeight: FontWeight.w600,
-        letterSpacing: 1.15,
         fontSize: 22,
         color: colorScheme.onSurface,
       ),
-      bodyLarge: GoogleFonts.raleway(
-        fontWeight: FontWeight.w400,
-        letterSpacing: 1.05,
+      bodyLarge: TextStyle(
+        fontFamily: "Raleway",
+        fontWeight: FontWeight.w600,
+        letterSpacing: 1.25,
+        fontSize: 18,
+        color: colorScheme.onSurface,
+      ),
+      bodyMedium: TextStyle(
+        fontFamily: "Raleway",
+        fontWeight: FontWeight.w600,
+        letterSpacing: 1.15,
         fontSize: 16,
         color: colorScheme.onSurface,
       ),
-      bodyMedium: GoogleFonts.raleway(
-        fontWeight: FontWeight.w400,
-        letterSpacing: 1.025,
+      bodySmall: TextStyle(
+        fontFamily: "Raleway",
+        fontWeight: FontWeight.w600,
+        letterSpacing: 1.04,
         fontSize: 14,
         color: colorScheme.onSurface,
       ),
-      bodySmall: GoogleFonts.raleway(
-        fontWeight: FontWeight.w400,
-        letterSpacing: 1.04,
-        fontSize: 12,
-        color: colorScheme.onSurface,
-      ),
-      labelLarge: GoogleFonts.raleway(
+      labelLarge: TextStyle(
+        fontFamily: "Raleway",
         fontWeight: FontWeight.w500,
         letterSpacing: 1.01,
         fontSize: 14,
         color: colorScheme.onSurface,
       ),
-      labelMedium: GoogleFonts.raleway(
+      labelMedium: TextStyle(
+        fontFamily: "Raleway",
         fontWeight: FontWeight.w500,
         letterSpacing: 1.05,
         fontSize: 12,
         color: colorScheme.onSurface,
       ),
-      labelSmall: GoogleFonts.raleway(
+      labelSmall: TextStyle(
+        fontFamily: "Raleway",
         fontWeight: FontWeight.w500,
         letterSpacing: 1.05,
         fontSize: 11,

@@ -35,3 +35,14 @@ flutter:
 
   assets:
     - assets/tandem-love.png
+  fonts:
+    - family: Ultra
+      fonts:
+      - asset: assets/fonts/Ultra-Regular.ttf
+        weight: 400
+    - family: Playfair
+      fonts:
+      - asset: assets/fonts/Playfair.ttf
+    - family: Raleway
+      fonts:
+      - asset: assets/fonts/Raleway.ttf
