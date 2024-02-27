@@ -108,12 +108,16 @@ class PlusOneForm extends ConsumerWidget {
   const PlusOneForm({Key? key}) : super(key: key);
 
   void _submitPlusOneChanges(WidgetRef ref) {
+    if (ref.read(bringingPlusOneProvider)) {
     ref.read(weddingGuestProvider.notifier).setPlusOne(
           WeddingGuest(
             name: ref.read(guestNameTcProvider).text,
             dietaryInfo: ref.read(guestDietTcProvider).text,
           ),
         );
+    } else {
+      ref.read(weddingGuestProvider.notifier).setPlusOne(null);
+    }
   }
 
   @override
@@ -123,8 +127,11 @@ class PlusOneForm extends ConsumerWidget {
         SwitchListTile(
           title: const Text("Bringing Plus-One"),
           value: ref.watch(bringingPlusOneProvider),
-          onChanged: (val) =>
-              ref.read(bringingPlusOneProvider.notifier).state = val,
+          onChanged: (val) {
+            ref.read(bringingPlusOneProvider.notifier).state = val;
+
+            _submitPlusOneChanges(ref);
+          },
         ),
 
         // if bring plus one, show fields for name and dietary restrictions

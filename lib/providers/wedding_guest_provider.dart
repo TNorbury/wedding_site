@@ -62,7 +62,7 @@ class WeddingGuestNotifier extends StateNotifier<WeddingGuest?> {
     _scheduleSetUpdate();
   }
 
-  void setPlusOne(WeddingGuest plusOne) {
+  void setPlusOne(WeddingGuest? plusOne) {
     assert(state != null);
     state = state!.copyWith(plusOne: plusOne);
     _scheduleSetUpdate();
