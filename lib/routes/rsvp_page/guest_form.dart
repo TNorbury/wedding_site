@@ -98,7 +98,31 @@ class GuestForm extends ConsumerWidget {
             ),
             const PlusOneForm(),
           ],
-        ]
+        ],
+        const SizedBox(height: 16),
+        switch (ref.watch(setStatusProvider)) {
+          SetStatus.waiting => const Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(width: 8),
+                Text("Saving Changes...")
+              ],
+            ),
+          SetStatus.done => const Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(
+                  Icons.check,
+                  color: Colors.green,
+                  size: 24,
+                ),
+                SizedBox(width: 8),
+                Text("Changes saved")
+              ],
+            ),
+          _ => const SizedBox.shrink(),
+        }
       ],
     );
   }
@@ -109,12 +133,12 @@ class PlusOneForm extends ConsumerWidget {
 
   void _submitPlusOneChanges(WidgetRef ref) {
     if (ref.read(bringingPlusOneProvider)) {
-    ref.read(weddingGuestProvider.notifier).setPlusOne(
-          WeddingGuest(
-            name: ref.read(guestNameTcProvider).text,
-            dietaryInfo: ref.read(guestDietTcProvider).text,
-          ),
-        );
+      ref.read(weddingGuestProvider.notifier).setPlusOne(
+            WeddingGuest(
+              name: ref.read(guestNameTcProvider).text,
+              dietaryInfo: ref.read(guestDietTcProvider).text,
+            ),
+          );
     } else {
       ref.read(weddingGuestProvider.notifier).setPlusOne(null);
     }
