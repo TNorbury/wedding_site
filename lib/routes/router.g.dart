@@ -11,6 +11,7 @@ List<RouteBase> get $appRoutes => [
       $rsvpRouteData,
       $giftRouteData,
       $venueRouteData,
+      $lockRouteData,
     ];
 
 RouteBase get $homePageRouteData => GoRouteData.$route(
@@ -90,6 +91,28 @@ extension $VenueRouteDataExtension on VenueRouteData {
 
   String get location => GoRouteData.$location(
         '/venue',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $lockRouteData => GoRouteData.$route(
+      path: '/lock',
+      factory: $LockRouteDataExtension._fromState,
+    );
+
+extension $LockRouteDataExtension on LockRouteData {
+  static LockRouteData _fromState(GoRouterState state) => LockRouteData();
+
+  String get location => GoRouteData.$location(
+        '/lock',
       );
 
   void go(BuildContext context) => context.go(location);

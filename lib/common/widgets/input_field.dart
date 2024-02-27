@@ -7,6 +7,7 @@ class InputField extends StatefulWidget {
   final int? maxLines;
   final String? helperText;
   final TextEditingController controller;
+  final String? errorText;
 
   /// called when the value of the input has changed and can be read from the
   /// associated controller
@@ -18,6 +19,7 @@ class InputField extends StatefulWidget {
     required this.onChanged,
     this.maxLines,
     this.helperText,
+    this.errorText,
   }) : super(key: key);
 
   @override
@@ -35,22 +37,24 @@ class _InputFieldState extends State<InputField> {
 
   void _setDebounce() {
     _debounce?.cancel();
-    _debounce = Timer(const Duration(milliseconds: 500), () {
-      widget.onChanged();
-    });
+    _debounce = Timer(
+      const Duration(milliseconds: 500),
+      widget.onChanged,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: widget.controller,
       decoration: InputDecoration(
         labelText: widget.label,
         helperText: widget.helperText,
+        errorText: widget.errorText,
       ),
       maxLines: widget.maxLines,
       onChanged: (_) => _setDebounce(),
-      onSubmitted: (_) => _setDebounce(),
+      onFieldSubmitted: (_) => _setDebounce(),
       onEditingComplete: () => _setDebounce(),
     );
   }

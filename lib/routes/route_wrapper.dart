@@ -26,8 +26,7 @@ class RouteWrapper extends StatelessWidget {
     final phone = MediaQuery.of(context).size.width <= 660;
 
     return Scaffold(
-      backgroundColor:
-          Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.55),
+      backgroundColor: colorSchemeOf(context).surfaceVariant.withOpacity(0.55),
       drawer: NavigationDrawer(
         selectedIndex: selectedTab?.index,
         backgroundColor: colorSchemeOf(context).surfaceVariant,

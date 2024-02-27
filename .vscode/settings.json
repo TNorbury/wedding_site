@@ -1,6 +1,8 @@
 {
   "dart.flutterSdkPath": ".fvm/versions/3.16.1",
   "cSpell.words": [
+    "behitchment",
+    "localstorage",
     "playfair",
     "raleway",
     "riverpod",

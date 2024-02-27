@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wedding_site/models/wedding_guest.dart';
+import 'package:wedding_site/providers/local_storage_provider.dart';
 import 'package:wedding_site/services/repositories/wedding_guest_repository.dart';
 
 enum SetStatus {
@@ -14,8 +15,7 @@ final setStatusProvider = StateProvider<SetStatus?>((ref) {
 });
 
 final weddingGuestProvider =
-    StateNotifierProvider.autoDispose<WeddingGuestNotifier, WeddingGuest?>(
-        (ref) {
+    StateNotifierProvider<WeddingGuestNotifier, WeddingGuest?>((ref) {
   final weddingGuestNotifier = WeddingGuestNotifier(ref);
   final sub =
       ref.watch(weddingGuestRepositoryProvider).streamCurrentGuest().listen(
@@ -32,6 +32,10 @@ final weddingGuestProvider =
   return weddingGuestNotifier;
 });
 
+final currentAccessCodeProvider = StateProvider<String>((ref) {
+  return "";
+});
+
 class WeddingGuestNotifier extends StateNotifier<WeddingGuest?> {
   final Ref ref;
   WeddingGuestNotifier(this.ref) : super(null);
@@ -40,6 +44,10 @@ class WeddingGuestNotifier extends StateNotifier<WeddingGuest?> {
 
   void setGuest(WeddingGuest guest) {
     state = guest;
+
+    ref
+        .read(localStorageProvider.future)
+        .then((storage) => storage.setItem(kAccessCodeKey, guest.accessCode));
   }
 
   void setIsComing(bool isComing) {
