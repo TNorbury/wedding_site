@@ -41,6 +41,7 @@ class _RsvpPageState extends ConsumerState<RsvpPage> {
               _initialLoad = true;
             }
           },
+          fireImmediately: true,
         );
       },
     );
