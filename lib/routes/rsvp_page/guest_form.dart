@@ -3,7 +3,44 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wedding_site/common/widgets/input_field.dart';
 import 'package:wedding_site/models/wedding_guest.dart';
 import 'package:wedding_site/providers/wedding_guest_provider.dart';
-import 'package:wedding_site/routes/rsvp_page/rsvp_page.dart';
+
+final rsvpProvider = StateProvider<bool?>((ref) {
+  return null;
+});
+
+final bringingPlusOneProvider = StateProvider<bool>((ref) {
+  return false;
+});
+
+final dietTcProvider = Provider.autoDispose<TextEditingController>((ref) {
+  final tc = TextEditingController();
+
+  ref.onDispose(() {
+    tc.dispose();
+  });
+
+  return tc;
+});
+
+final guestNameTcProvider = Provider.autoDispose<TextEditingController>((ref) {
+  final tc = TextEditingController();
+
+  ref.onDispose(() {
+    tc.dispose();
+  });
+
+  return tc;
+});
+
+final guestDietTcProvider = Provider.autoDispose<TextEditingController>((ref) {
+  final tc = TextEditingController();
+
+  ref.onDispose(() {
+    tc.dispose();
+  });
+
+  return tc;
+});
 
 class GuestForm extends ConsumerWidget {
   const GuestForm({super.key});

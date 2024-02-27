@@ -6,44 +6,6 @@ import 'package:wedding_site/routes/rsvp_page/guest_form.dart';
 import 'package:wedding_site/theme/breakpoints.dart';
 import 'package:wedding_site/theme/theme.dart';
 
-final rsvpProvider = StateProvider<bool?>((ref) {
-  return null;
-});
-
-final bringingPlusOneProvider = StateProvider<bool>((ref) {
-  return false;
-});
-
-final dietTcProvider = Provider.autoDispose<TextEditingController>((ref) {
-  final tc = TextEditingController();
-
-  ref.onDispose(() {
-    tc.dispose();
-  });
-
-  return tc;
-});
-
-final guestNameTcProvider = Provider.autoDispose<TextEditingController>((ref) {
-  final tc = TextEditingController();
-
-  ref.onDispose(() {
-    tc.dispose();
-  });
-
-  return tc;
-});
-
-final guestDietTcProvider = Provider.autoDispose<TextEditingController>((ref) {
-  final tc = TextEditingController();
-
-  ref.onDispose(() {
-    tc.dispose();
-  });
-
-  return tc;
-});
-
 class RsvpPage extends ConsumerStatefulWidget {
   const RsvpPage({super.key});
 
