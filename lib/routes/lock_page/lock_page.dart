@@ -100,12 +100,13 @@ class _LockPageState extends ConsumerState<LockPage> {
                   ),
                   Text(
                     "If you experience any issues, please don't hesitate to reach out to either of the above mentioned",
-                    style: textThemeOf(context).bodyMedium,
+                    style: textThemeOf(context).bodySmall,
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
                     width: c.maxWidth * .5,
                     child: InputField(
+                      maxLines: 1,
                       controller: ref.watch(accessCodeTcProvider),
                       label: "Access Code",
                       onChanged: () {
