@@ -46,3 +46,5 @@ app.*.map.json
 .fvm/versions
 
 lib/firebase_options.dart
+.firebase/
+.firebaserc
