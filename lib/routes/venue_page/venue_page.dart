@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:wedding_site/common/widgets/bulleted_item.dart';
 import 'package:wedding_site/common/widgets/info_section.dart';
 import 'package:wedding_site/theme/breakpoints.dart';
 import 'package:wedding_site/theme/theme.dart';
@@ -89,38 +90,19 @@ class _GettingThereInfo extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          const _BulletedItemNormal(
+          const BulletedItem(
             text:
                 "Biking: Bring your bikes right on into our venue, they’ll make great decor!",
           ),
           const SizedBox(
             height: 8,
           ),
-          const _BulletedItemNormal(
+          const BulletedItem(
             text:
                 "Driving: Street parking is available in the surrounding neighborhood.",
           )
         ],
       ),
-    );
-  }
-}
-
-class _BulletedItemNormal extends StatelessWidget {
-  final String text;
-  const _BulletedItemNormal({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text("•"),
-        Flexible(child: Text(text)),
-      ],
     );
   }
 }
