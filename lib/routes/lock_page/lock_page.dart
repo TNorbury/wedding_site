@@ -95,13 +95,16 @@ class _LockPageState extends ConsumerState<LockPage> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    "Please enter the access code from your wedding invite",
-                    style: textThemeOf(context).titleMedium,
+                    "Please enter the access code from your wedding invite.",
+                    style: textThemeOf(context).bodyMedium,
                   ),
-                  Text(
-                    "If you experience any issues, please don't hesitate to reach out to either of the above mentioned",
-                    style: textThemeOf(context).bodySmall,
-                    textAlign: TextAlign.center,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      "If you experience any issues, please don't hesitate to reach out to either of the above mentioned.",
+                      style: textThemeOf(context).bodySmall,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   SizedBox(
                     width: c.maxWidth * .5,
