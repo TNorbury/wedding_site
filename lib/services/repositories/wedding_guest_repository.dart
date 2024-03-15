@@ -57,4 +57,11 @@ class WeddingGuestRepository {
   Future<void> updateGuest(WeddingGuest guest) async {
     await guestRef.doc(guest.id).set(guest);
   }
+
+  Future<List<WeddingGuest>> getAllGuests({required bool? isRsvp}) {
+    return guestRef
+        .where("isComing", isEqualTo: isRsvp)
+        .get()
+        .then((value) => value.docs.map((e) => e.data()).toList());
+  }
 }

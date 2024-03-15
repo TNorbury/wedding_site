@@ -1,5 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wedding_site/providers/wedding_guest_provider.dart';
 import 'package:wedding_site/routes/router.dart';
+import 'package:wedding_site/routes/rsvp_count_dialog/rsvp_count_dialog.dart';
 import 'package:wedding_site/theme/theme.dart';
 
 enum SiteTab {
@@ -91,13 +95,13 @@ class RouteWrapper extends StatelessWidget {
   }
 }
 
-class SiteHeader extends StatelessWidget {
+class SiteHeader extends ConsumerWidget {
   const SiteHeader({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     // final phone = MediaQuery.of(context).size.width <= WidthBreakpoints.medium;
     final smallScreen = MediaQuery.of(context).size.width <= 660;
 
@@ -167,14 +171,32 @@ class SiteHeader extends StatelessWidget {
       child = content;
     }
 
-    return Padding(
-      padding: EdgeInsets.only(
-        right: 32,
-        left: smallScreen ? 0 : 32,
-        top: 16.0,
-        bottom: 16.0,
+    final admin = ref.watch(
+      weddingGuestProvider.select(
+        (value) =>
+            value?.accessCode == "mdtn68" ||
+            (kDebugMode && value?.accessCode == "testtest"),
       ),
-      child: child,
+    );
+
+    return GestureDetector(
+      onDoubleTap: admin
+          ? () {
+              showDialog(
+                context: context,
+                builder: (context) => RsvpCountDialog(),
+              );
+            }
+          : null,
+      child: Padding(
+        padding: EdgeInsets.only(
+          right: 32,
+          left: smallScreen ? 0 : 32,
+          top: 16.0,
+          bottom: 16.0,
+        ),
+        child: child,
+      ),
     );
   }
 }
