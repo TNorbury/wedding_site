@@ -48,9 +48,12 @@ class HomePage extends ConsumerWidget {
             Text(
               """
 Welcome, $salutations, to the behitchment of Missy and Tyler. We’re excited to celebrate with you! 
-    
-Here’s some general information about the event.
           """,
+              style: textThemeOf(context).bodyMedium,
+            ),
+            const Images(),
+            Text(
+              "Here’s some general information about the event.",
               style: textThemeOf(context).bodyMedium,
             ),
             const InfoSection(
@@ -86,6 +89,41 @@ Friday night, May 31st
             )
           ],
         ),
+      );
+    });
+  }
+}
+
+class Images extends StatelessWidget {
+  const Images({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final phone = MediaQuery.of(context).size.width <= 660;
+
+    return LayoutBuilder(builder: (context, c) {
+      final imgWidth = phone ? c.maxHeight * .8 : c.maxWidth * .45;
+      double? height;
+
+      if (phone) {
+        height = MediaQuery.of(context).size.height * .5;
+      }
+      return Flex(
+        direction: phone ? Axis.vertical : Axis.horizontal,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Image.asset(
+            "assets/images/1.png",
+            width: imgWidth,
+            height: height,
+          ),
+          if (phone) const SizedBox(height: 16),
+          Image.asset(
+            "assets/images/2.jpeg",
+            width: imgWidth,
+            height: height,
+          ),
+        ],
       );
     });
   }

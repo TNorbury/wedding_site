@@ -37,6 +37,8 @@ flutter:
 
   assets:
     - assets/tandem-love.png
+    - assets/images/1.png
+    - assets/images/2.jpeg
   fonts:
     - family: Ultra
       fonts:
