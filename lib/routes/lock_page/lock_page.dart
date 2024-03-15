@@ -120,6 +120,9 @@ class _LockPageState extends ConsumerState<LockPage> {
                           });
                         }
                       },
+                      onSubmitted: () {
+                        _onEnterPressed();
+                      },
                       errorText: _errorMessage,
                     ),
                   ),

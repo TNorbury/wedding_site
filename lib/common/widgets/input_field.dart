@@ -12,6 +12,8 @@ class InputField extends StatefulWidget {
   /// called when the value of the input has changed and can be read from the
   /// associated controller
   final VoidCallback onChanged;
+
+  final VoidCallback? onSubmitted;
   const InputField({
     Key? key,
     required this.controller,
@@ -20,6 +22,7 @@ class InputField extends StatefulWidget {
     this.maxLines,
     this.helperText,
     this.errorText,
+    this.onSubmitted,
   }) : super(key: key);
 
   @override
@@ -54,7 +57,13 @@ class _InputFieldState extends State<InputField> {
       ),
       maxLines: widget.maxLines,
       onChanged: (_) => _setDebounce(),
-      onFieldSubmitted: (_) => _setDebounce(),
+      onFieldSubmitted: (_) {
+        _setDebounce();
+
+        if (widget.onSubmitted != null) {
+          widget.onSubmitted?.call();
+        }
+      },
       onEditingComplete: () => _setDebounce(),
     );
   }
