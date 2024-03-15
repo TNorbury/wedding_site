@@ -174,7 +174,7 @@ class SiteHeader extends ConsumerWidget {
     final admin = ref.watch(
       weddingGuestProvider.select(
         (value) =>
-            value?.accessCode == "mdtn68" ||
+            value?.accessCode == "mltn68" ||
             (kDebugMode && value?.accessCode == "testtest"),
       ),
     );
