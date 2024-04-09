@@ -39,6 +39,7 @@ class _RsvpCountDialogState extends ConsumerState<RsvpCountDialog> {
             future: _weddingGuestsFuture,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+                int confirmedGuestsCount = 0;
                 final confirmedGuests = snapshot.data![1]
                     .where((element) => element.name != "Test Guy Ty");
                 final notComingGuests = snapshot.data![2];
@@ -48,6 +49,14 @@ class _RsvpCountDialogState extends ConsumerState<RsvpCountDialog> {
                       !notComingGuests.contains(element) &&
                       element.name != "Test Guy Ty",
                 );
+
+                for (final g in confirmedGuests) {
+                  confirmedGuestsCount++;
+
+                  if (g.plusOne != null) {
+                    confirmedGuestsCount++;
+                  }
+                }
 
                 return IntrinsicHeight(
                   child: Row(
@@ -73,7 +82,7 @@ class _RsvpCountDialogState extends ConsumerState<RsvpCountDialog> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Coming (${confirmedGuests.length})",
+                              "Coming ($confirmedGuestsCount)",
                               style: textThemeOf(context).titleMedium,
                             ),
                             for (final guest in confirmedGuests)
